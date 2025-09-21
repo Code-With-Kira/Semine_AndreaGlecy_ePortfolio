@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My ePortfolio</title>
+  <style>
+    html {
+      scroll-behavior: smooth; /* smooth scroll */
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #1a0000; /* dark red theme */
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+
+    /* Navigation Bar */
+    nav {
+      position: fixed;
+      top: 50px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(40, 0, 0, 0.95);
+      padding: 0.8rem 2rem;
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      z-index: 10;
+      box-shadow: 0 0 15px rgba(255, 50, 50, 0.6);
+      border-radius: 50px; /* rounded */
+      width: fit-content; /* not full width */
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #ffb3b3;
+      font-weight: bold;
+      transition: color 0.3s, text-shadow 0.3s;
+    }
+
+    nav a:hover {
+      color: #fff;
+      text-shadow: 0 0 10px rgba(255, 80, 80, 0.9);
+    }
+
+    /* Hamburger Menu Icon */
+    .hamburger {
+      display: none; /* Hidden by default on desktop */
+      flex-direction: column;
+      cursor: pointer;
+      gap: 4px;
+      padding: 10px;
+    }
+
+    .hamburger .bar {
+      width: 25px;
+      height: 3px;
+      background-color: #ffb3b3;
+      border-radius: 5px;
+      transition: all 0.3s ease-in-out;
+    }
+
+    /* Responsive Styles for Mobile/Tablet */
+    @media (max-width: 860px) {
+      nav {
+        /* Reposition nav container to the top right */
+        top: 20px;
+        left: auto;
+        right: 20px;
+        transform: none;
+        background: transparent;
+        box-shadow: none;
+        padding: 0;
+        width: auto; /* Allow it to shrink to its content */
+        align-items: flex-end;
+        flex-direction: column;
+      }
+
+      .hamburger {
+        display: flex; /* Show the hamburger icon on mobile */
+      }
+
+      .nav-links {
+        display: none; /* Hide the links by default on mobile */
+        flex-direction: column;
+        background: rgba(40, 0, 0, 0.95);
+        border-radius: 20px;
+        padding: 1rem;
+        margin-top: 10px;
+        box-shadow: 0 0 15px rgba(255, 50, 50, 0.6);
+      }
+
+      .nav-links.active {
+        display: flex; /* Show links when hamburger is clicked */
+      }
+    }
+
+    header {
+      text-align: center;
+      padding: 4rem 2rem 2rem; /* more space for nav */
+      color: #ffb3b3;
+    }
+.sample-img {
+  margin-top: 1rem;
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(255, 50, 50, 0.5);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.sample-img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(255, 80, 80, 0.9);
+}
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4rem;
+      padding: 2rem;
+    }
+
+    .card {
+      background: rgba(40, 0, 0, 0.9);
+      border-radius: 15px;
+      padding: 1.5rem;
+      width: 320px; /* card-like size */
+      height: 100%; /* tall rectangle like a playing card */
+      box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
+      transition: transform 0.3s, box-shadow 0.3s;
+      transform: rotate(var(--angle));
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .card:hover {
+      transform: scale(1.05) rotate(var(--angle));
+      box-shadow: 0 0 25px rgba(255, 80, 80, 0.8);
+    }
+
+    h2 {
+      margin-top: 2;
+      color: #ff6666; /* Keeping the accent red for headings */
+    }
+  </style>
+</head>
+<body>
+  <canvas id="card-animation"></canvas>
+
+  <!-- Rounded Navigation Bar -->
+  <nav>
+    <div class="hamburger">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+    <div class="nav-links">
+      <a href="#profile">Profile</a>
+      <a href="#resume">Résumé</a>
+      <a href="#samples">Work</a>
+      <a href="#cases">Cases</a>
+      <a href="#credentials">Credentials</a>
+      <a href="#references">Refs</a>
+      <a href="#compliance">Compliance</a>
+    </div>
+  </nav>
+
+  <header>
+    <h1></h1>
+  </header>
+
+  <div class="container">
+    <div class="card" style="--angle: -2deg;" id="profile">
+      <h2>About Me</h2>
+      <p>I’m Andrea Glecy A. Semine, a graphic designer with a passion for creativity, leadership, and growth. I thrive on turning ideas into impactful visuals while inspiring others to reach their full potential. Driven by success, I combine design skills with a strong sense of leadership to create work that not only looks good but makes a difference.</p>
+    </div>
+
+    <div class="card" style="--angle: 3deg;" id="resume">
+      <h2>Résumé</h2>
+      <img src="resume.png" alt="Work Sample" class="sample-img">
+    </div>
+
+    <div class="card" style="--angle: -4deg;" id="samples">
+  <h2>Work Samples / Artifacts</h2>
+  <img src="tastehaven.png" alt="Work Sample" class="sample-img">
+</div>
+
+    <div class="card" style="--angle: -4deg;" id="samples">
+  <h2>Work Samples / Artifacts</h2>
+  <img src="folderlyy.png" alt="Work Sample" class="sample-img">
+</div>
+
+
+    <div class="card" style="--angle: 2deg;" id="cases">
+      <h2>Case Studies</h2>
+      <p>Taste Haven, a new restaurant, needed a stylish and functional website to showcase their menu and attract more customers. My role was to design and develop a responsive website that highlighted their brand identity while making reservations simple and convenient. I created a modern layout with warm visuals, an interactive menu, and an integrated table booking system, all optimized for speed and mobile use. As a result, the website launch increased online reservations by 35% within two months and strengthened the restaurant’s digital presence.</p>
+    </div>
+
+    <div class="card" style="--angle: 2deg;" id="cases">
+      <h2>Case Studies</h2>
+      <p>Folderly is a free academic organizer app designed to help students manage tasks, courses, and study materials. I was responsible for designing a minimalist and intuitive interface that worked seamlessly on both iOS and Android. To achieve this, I built a clean UI featuring task lists, course folders, schedules, and widgets, along with added functions like calendar sync and a personalized student ID card. After launch, the improved design increased student retention by 40%, and users praised the app’s simplicity and effectiveness in organizing their academic life.</p>
+    </div>
+
+    <div class="card" style="--angle: -3deg;" id="credentials">
+      <h2>Credentials</h2>
+      <img src="cert1.png" alt="">
+      <img src="cert2.png" alt="">
+      <img src="cert3.png" alt="">
+    </div>
+
+    <div class="card" style="--angle: 1deg;" id="references">
+      <h2>References</h2>
+      <p>Ms. Clarissa V. Reyes, MBA 
+        <br>Professor, Caraga State University
+        <br>09875735211
+      <p>Mr. Marco S. Delos Santos
+         <br>Website Designer, Harvard University
+         <br>09763529846
+      <p>Ms. Angela M. Lopez
+      <br>Marketing Manager, Brew & Bite Café
+      <br>09092724100
+    </div>
+
+   <div class="card" style="--angle: -1.5deg;" id="compliance">
+  <h2>Contact Me</h2>
+  <p>
+    Contact Me: 09092735100
+    <br>Email: semineandreaglecy@gmail.com
+    <br> LinkedIn:
+    <a href="https://www.linkedin.com/in/andrea-glecy-semine-71140a37b/" target="_blank">
+      andreaglecysemine
+    </a>
+  </p>
+</div>
+
+  </div>
+
+ <script>
+    const canvas = document.getElementById("card-animation");
+    const ctx = canvas.getContext("2d");
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const hamburger = document.querySelector(".hamburger");
+    const navLinks = document.querySelector(".nav-links");
+
+    hamburger.addEventListener("click", () => {
+      navLinks.classList.toggle("active");
+    });
+
+    window.addEventListener('resize', () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    });
+
+    const suits = ['♥', '♦', '♣', '♠'];
+    let cards = [];
+
+    class PlayingCard {
+        constructor(x, y) {
+            this.x = x;
+            this.y = y;
+            this.size = Math.random() * 20 + 40; // width
+            this.height = this.size * 1.4;
+            this.speedY = Math.random() * 1 + 0.5;
+            this.speedX = (Math.random() - 0.5) * 2;
+            this.rotation = Math.random() * 360;
+            this.rotationSpeed = (Math.random() - 0.5) * 2;
+            this.suit = suits[Math.floor(Math.random() * suits.length)];
+            this.suitColor = (this.suit === '♥' || this.suit === '♦') ? '#ff6666' : '#ffb3b3';
+            this.opacity = 1;
+        }
+
+        update() {
+            this.y += this.speedY;
+            this.x += this.speedX;
+            this.rotation += this.rotationSpeed;
+            if (this.y > canvas.height + this.height) {
+                this.y = -this.height;
+                this.x = Math.random() * canvas.width;
+            }
+        }
+
+        draw() {
+            ctx.save();
+            ctx.globalAlpha = this.opacity;
+            ctx.translate(this.x, this.y);
+            ctx.rotate(this.rotation * Math.PI / 180);
+
+            // Card body with 3D effect
+            const cornerRadius = 8;
+            const shadowOffset = 4;
+
+            // Shadow layer
+            ctx.fillStyle = 'rgba(0,0,0,0.4)';
+            ctx.beginPath();
+            ctx.moveTo(cornerRadius + shadowOffset, shadowOffset);
+            ctx.arcTo(this.size + shadowOffset, shadowOffset, this.size + shadowOffset, this.height + shadowOffset, cornerRadius);
+            ctx.arcTo(this.size + shadowOffset, this.height + shadowOffset, shadowOffset, this.height + shadowOffset, cornerRadius);
+            ctx.arcTo(shadowOffset, this.height + shadowOffset, shadowOffset, shadowOffset, cornerRadius);
+            ctx.arcTo(shadowOffset, shadowOffset, this.size + shadowOffset, shadowOffset, cornerRadius);
+            ctx.closePath();
+            ctx.fill();
+
+            // Main card face
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.95)';
+            ctx.strokeStyle = '#aaa';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(cornerRadius, 0);
+            ctx.arcTo(this.size, 0, this.size, this.height, cornerRadius);
+            ctx.arcTo(this.size, this.height, 0, this.height, cornerRadius);
+            ctx.arcTo(0, this.height, 0, 0, cornerRadius);
+            ctx.arcTo(0, 0, this.size, 0, cornerRadius);
+            ctx.closePath();
+            ctx.fill();
+            ctx.stroke();
+
+            // Suit
+            ctx.fillStyle = this.suitColor;
+            ctx.font = `${this.size * 0.6}px Arial`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(this.suit, this.size / 2, this.height / 2);
+
+            ctx.restore();
+        }
+    }
+
+    function init() {
+        for (let i = 0; i < 20; i++) {
+            cards.push(new PlayingCard(Math.random() * canvas.width, Math.random() * canvas.height));
+        }
+    }
+
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        cards.forEach(card => {
+            card.update();
+            card.draw();
+        });
+        requestAnimationFrame(animate);
+    }
+
+    init();
+    animate();
+  </script>
+</body>
+</html>
